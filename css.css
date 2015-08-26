@@ -6,11 +6,14 @@ body{
 input {
     border: solid 2px blue;
     border-radius: 5px;
+    width: 188px;
+    height: 20px;
     
 }
 textarea{
     border: solid 2px blue;
     border-radius: 5px;
+    resize: none;
 }
 h1{
     font-family: monospace,sans-serif;
