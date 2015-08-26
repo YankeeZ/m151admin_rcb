@@ -24,12 +24,11 @@
             <input type="email" name="email"><br/>
             Pseudo : <br/>
             <input type="text" name="pseudo"><br/>
-            Password : <br/>
+            Mot de passe : <br/>
             <input type="password" name="password"><br/>
             Description : <br/>
             <textarea rows="4" cols="50">Description</textarea>
-        </form>
-        
+        </form> 
     </div>
 </body>
 </html>
