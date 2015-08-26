@@ -1,0 +1,18 @@
+body{
+    background: whitesmoke;
+}
+
+input {
+    border: solid 2px blue;
+    border-radius: 5px;
+}
+textarea{
+    border: solid 2px blue;
+    border-radius: 5px;
+}
+
+#divPrin{
+    padding-right: 5px;
+    width: 376px;
+    background: white;
+}
