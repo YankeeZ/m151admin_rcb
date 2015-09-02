@@ -12,7 +12,7 @@ function ConnexionBDD($DBNAME, $HOST, $USER, $PASSWORD) {
     return $dbh;
 }
 
-function CreeUtilisateur() {
+/*function CreeUtilisateur() {
     if (isset($_SESSION['submit']) && $_SESSION['submit'] == 'Sign-Up') {
         $Password = FILTER_INPUT(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);
         $cpass = FILTER_INPUT(INPUT_POST, 'cpass', FILTER_SANITIZE_STRING);
@@ -49,4 +49,4 @@ function CreeUtilisateur() {
             }
         }
     }
-}
+}*/
