@@ -2,16 +2,23 @@
 
 require_once './mysqlinc.php';
 
-function ConnexionBDD($DBNAME, $HOST, $USER, $PASSWORD) {
-    try {
-        $dbh = new PDO('mysql:dbname=' . $DBNAME . ';host=' . $HOST . '', $USER, $PASSWORD);
-    } catch (Exception $e) {
-        echo "Connexion à MySQL impossible : ", $e->getMessage();
-        die();
+function ConnexionBDD() {
+    static $dbh = null;
+    if($dbh == null)
+    {
+        try {
+            $dbh = new PDO('mysql:dbname='.DBNAME.';host='.HOST.'', USER, PASSWORD);
+        } catch (PDOException $e) {
+            echo "Connexion à MySQL impossible : ", $e->getMessage();
+            die();
+        }
     }
     return $dbh;
 }
 
+function CreeUtilisateur(){
+    
+}
 /*function CreeUtilisateur() {
     if (isset($_SESSION['submit']) && $_SESSION['submit'] == 'Sign-Up') {
         $Password = FILTER_INPUT(INPUT_POST, 'Password', FILTER_SANITIZE_STRING);

@@ -1,5 +1,6 @@
 <?php 
-
+    require_once './dbFunction.php';
+    ConnexionBDD();
 ?>
 
 <!doctype html>
@@ -13,7 +14,7 @@
 <body>
     <div id="divPrin">
         <h1>Formulaire</h1>
-        <form method="post">
+        <form action="dbFunction.php" method="post">
             <label for="nom" >Nom : </label><br/>
             <input id="nom" type="text" name="Nom" required><br/>
             
