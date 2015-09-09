@@ -18,7 +18,7 @@ function ConnexionBDD() {
     return $dbh;
 }
 
-if(isset($_POST['submit'])) {
+if(isset($_REQUEST['submit'])) {
     CreeUtilisateur();
 }
 
@@ -32,7 +32,7 @@ function CreeUtilisateur(){
         $mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
         $description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
         
-        $req = ConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,:mdp,:description)");
+        $req = ConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,SHA1(:mdp),:description)");
         $req->bindParam(':nom', $nom, PDO::PARAM_STR);
         $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
         $req->bindParam(':date', $date, PDO::PARAM_STR);
@@ -41,6 +41,8 @@ function CreeUtilisateur(){
         $req->bindParam(':mdp', $mdp, PDO::PARAM_STR);
         $req->bindParam(':description', $description, PDO::PARAM_STR);
         $req->execute();
+        
+        header("Location:formulaire.php");
 }
 /*function CreeUtilisateur() {
     if (isset($_SESSION['submit']) && $_SESSION['submit'] == 'Sign-Up') {
