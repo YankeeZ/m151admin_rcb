@@ -2,7 +2,7 @@
 
 require_once './mysqlinc.php';
 
-function ConnexionBDD() {
+function getConnexionBDD() {
     
     static $dbh = null;
     if($dbh == null)
@@ -22,7 +22,7 @@ if(isset($_REQUEST['submit'])) {
     CreeUtilisateur();
 }
 
-function CreeUtilisateur(){
+function getCreeUtilisateur(){
     
         $nom = FILTER_INPUT(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
         $prenom = FILTER_INPUT(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
@@ -32,7 +32,7 @@ function CreeUtilisateur(){
         $mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
         $description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
         
-        $req = ConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,SHA1(:mdp),:description)");
+        $req = getConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,SHA1(:mdp),:description)");
         $req->bindParam(':nom', $nom, PDO::PARAM_STR);
         $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
         $req->bindParam(':date', $date, PDO::PARAM_STR);
@@ -43,6 +43,11 @@ function CreeUtilisateur(){
         $req->execute();
         
         header("Location:formulaire.php");
+}
+
+function getAfficheUtilisateur(){
+        $result = "SELECT * FROM user";
+        return getConnexionBDD()->query($result);
 }
 /*function CreeUtilisateur() {
     if (isset($_SESSION['submit']) && $_SESSION['submit'] == 'Sign-Up') {

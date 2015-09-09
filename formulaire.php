@@ -31,7 +31,7 @@
             <label for="Desc" >Description : </label><br/>
             <textarea id="Desc" rows="4" cols="50">Description</textarea><br/><br/>
             
-            <input type="submit" name="submit"><input type="reset" name="Reset">
+            <input type="submit" name="submit"><input type="reset" name="Reset"><a href="afficheUtilisateur.php">Liste Utilisateur</a>
         </form> 
     </div>
 </body>
