@@ -34,7 +34,7 @@
             <input id="Mdp" type="password" name="mdp" required><br/>
             
             <label for="Desc" >Description : </label><br/>
-            <textarea id="Desc" rows="4" cols="50">Description</textarea><br/><br/>
+            <textarea id="Desc" rows="4" cols="50" placeholder="Ce champs n'est pas obligatoire !"></textarea><br/><br/>
             <?php
             //}
             ?>
