@@ -56,7 +56,7 @@ function DetailUtilisateur($id){
         return getConnexionBDD()->query($result);
 }
 
-function ModifierUtilisateur($id){
-        $result = "UPDATE user SET * WHERE idUser=".$id."";
+function ModifierUtilisateur($update){
+        $result = "UPDATE user SET * WHERE idUser=".$update."";
         return getConnexionBDD()->query($result);
 }
