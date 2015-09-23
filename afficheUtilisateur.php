@@ -6,7 +6,7 @@ include "dbFunctionHtml.php";
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Liste Utilisateur</title>
+  <title>Liste Utilisateurs</title>
   <link rel="stylesheet" href="css.css">
   <script src="script.js"></script>
 </head>
@@ -21,12 +21,19 @@ include "dbFunctionHtml.php";
                 <th>Date de Naissance</th>
                 <th>Email</th>
                 <th>Pseudo</th>
-            </tr>
         <?php
-            CreeTableau(getAfficheUtilisateur());
+        if(isset($_REQUEST['id'])){
+            $id = $_REQUEST['id'];
+            echo "<th>Mot de passe</th><th>Retour</th><th>Modifier</th></tr>";
+            CreeTableauDetail(DetailUtilisateur($id));
+        }
+        else {
+            echo "<th>Détail</th></tr>";
+            CreeTableau(AfficheUtilisateurs());
+        }
         ?>
         </table>
-        
+        <a href="./formulaire.php">Inscription</a>
     </div>
 </body>
 </html>

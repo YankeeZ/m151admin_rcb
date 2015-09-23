@@ -35,38 +35,46 @@ h1{
     background: white;
     border-radius: 5px;
 }
-/*
+
 table {
-		border: medium solid #6495ed;
-		width: 50%;
-		border-radius: 5px 5px 5px 5px;
+    border: medium solid #6495ed;
+    border-radius: 5px 5px 5px 5px;
 }
 
 th {
-		font-family: monospace;
-		border: thin solid black;
-		//width: 20%;
-		color: black;
-		padding-left: 10px;
-		padding-right: 10px;
-		background-color: #D0E3FA;
-		border-radius: 3px 3px 3px 3px;
+    font-family: monospace;
+    border: thin solid black;
+    color: black;
+    padding: 7px;
+    background-color: #D0E3FA;
+    border-radius: 3px 3px 3px 3px;
 }
 
 td {
-		font-family:monospace;
-		border: thin solid black;
-		width: 50%;
-		color: black;
-		padding: 5px;
-		text-align: center;
-		background-color: #ffffff;
-		border-radius: 3px 3px 3px 3px;
+    font-family:monospace;
+    border: thin solid black;
+    color: black;
+    padding: 5px;
+    text-align: center;
+    border-radius: 3px 3px 3px 3px;
 }
-*/
+
+td a {
+    background-color: black;
+    color:black;
+    text-decoration: none;
+    border-radius: 5px;
+} 
+
+td a:hover{
+    background-color: blue;
+    color: blue;
+    border-radius: 5px;
+}
+
 #divTab{
     position: absolute;
-    margin-left : 37%;
+    margin-left: 30%;
     background: white;
     border-radius: 5px;
     padding-left: 10px;

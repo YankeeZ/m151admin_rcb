@@ -11,7 +11,7 @@
         <h1>Formulaire</h1>
         <form action="dbFunction.php" method="post">
             <label for="nom" >Nom : </label><br/>
-            <input id="nom" type="text" name="nom" required><br/>
+            <input id="nom" type="text" name="nom" value="<?php echo $nom; ?>" required><br/>
             
             <label for="prenom" >Prénom : </label><br/>
             <input id="prenom" type="text" name="prenom" required><br/>
@@ -31,7 +31,7 @@
             <label for="Desc" >Description : </label><br/>
             <textarea id="Desc" rows="4" cols="50">Description</textarea><br/><br/>
             
-            <input type="submit" name="submit"><input type="reset" name="Reset"><a href="afficheUtilisateur.php">Liste Utilisateur</a>
+            <input type="submit" name="submit"><input type="reset" name="Reset"><a href="afficheUtilisateur.php">Liste Utilisateurs</a>
         </form> 
     </div>
 </body>
