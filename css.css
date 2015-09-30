@@ -8,7 +8,7 @@ input {
     border-radius: 5px;
     width: 188px;
     height: 20px;
-    
+
 }
 textarea{
     border: solid 2px blue;
@@ -80,4 +80,12 @@ td a:hover{
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+}
+
+input[type="button"] {
+    margin: 0;
+    padding: 0;
+    width: 17px;
+    height: 17px;
+    font-weight: bold;
 }
