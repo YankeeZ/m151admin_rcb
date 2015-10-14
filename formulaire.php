@@ -11,16 +11,9 @@ require_once "dbFunction.php";
     </head>
     <body>
         <?php
+            if(isset($_REQUEST["id"]))
+            {
                 $update = DetailUtilisateur($_REQUEST["id"]);
-
-                $id = "";
-                $nom = "";
-                $prenom = "";
-                $date = "";
-                $email = "";
-                $pseudo = "";
-                $desc = "";
-
                 while ($row = $update->fetch()) {
                     $id = $row["idUser"];
                     $nom = $row["Nom"];
@@ -30,7 +23,14 @@ require_once "dbFunction.php";
                     $pseudo = $row["Pseudo"];
                     $desc = $row["Description"];
                 }
-                
+            }
+            $id = "";
+            $nom = "";
+            $prenom = "";
+            $date = "";
+            $email = "";
+            $pseudo = "";
+            $desc = "";              
                 ?>
         <div id="divPrin">
             <h1>Formulaire</h1>
