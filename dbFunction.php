@@ -27,8 +27,7 @@ if (isset($_REQUEST['submit'])) {
     $mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
     $description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
 
-    if (isset($_REQUEST["id"])) {
-        $update = $_REQUEST["id"];
+    if (isset($_REQUEST["idUser"]) && is_numeric($_REQUEST['idUser'])) {
         ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description);
     } else {
         CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description);

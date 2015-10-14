@@ -11,11 +11,18 @@ require_once "dbFunction.php";
     </head>
     <body>
         <?php
+            $id = "";
+            $nom = "";
+            $prenom = "";
+            $date = "";
+            $email = "";
+            $pseudo = "";
+            $desc = "";     
             if(isset($_REQUEST["id"]))
             {
                 $update = DetailUtilisateur($_REQUEST["id"]);
                 while ($row = $update->fetch()) {
-                    //$id = $row["idUser"];
+                    $id = $row["idUser"];
                     $nom = $row["Nom"];
                     $prenom = $row["Prenom"];
                     $date = $row["DateNaissance"];
@@ -24,20 +31,11 @@ require_once "dbFunction.php";
                     $desc = $row["Description"];
                 }
             }
-            //$id = "";
-            $nom = "";
-            $prenom = "";
-            $date = "";
-            $email = "";
-            $pseudo = "";
-            $desc = "";              
-                ?>
+                         
+        ?>
         <div id="divPrin">
             <h1>Formulaire</h1>
-            <form action="dbFunction.php?id=<?php echo $id; ?>" method="post">
-                <!--<label for="nom" >ID : </label><br/>
-                <input id="nom" type="text" name="id" value="<?php echo $id; ?>" required><br/>-->
-                
+            <form action="afficheUtilisateur.php" method="post">               
                 <label for="nom" >Nom : </label><br/>
                 <input id="nom" type="text" name="nom" value="<?php echo $nom; ?>" required><br/>
 
@@ -58,7 +56,9 @@ require_once "dbFunction.php";
 
                 <label for="Desc" >Description : </label><br/>
                 <textarea id="Desc" rows="4" cols="50" value="<?php echo $pseudo; ?>" placeholder="Ce champs n'est pas obligatoire !"></textarea><br/><br/>
-                <input type="submit" name="submit"><input type="reset" name="Reset"><a href="afficheUtilisateur.php">Liste Utilisateurs</a>
+                <input type="submit" name="submit"><input type="reset" name="Reset">
+                <input type="hidden" value="<?= $id ?>" name="idUser"/>
+                <a href="afficheUtilisateur.php">Liste Utilisateurs</a>
             </form> 
         </div>
     </body>
