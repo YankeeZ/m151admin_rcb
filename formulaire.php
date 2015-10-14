@@ -15,7 +15,7 @@ require_once "dbFunction.php";
             {
                 $update = DetailUtilisateur($_REQUEST["id"]);
                 while ($row = $update->fetch()) {
-                    $id = $row["idUser"];
+                    //$id = $row["idUser"];
                     $nom = $row["Nom"];
                     $prenom = $row["Prenom"];
                     $date = $row["DateNaissance"];
@@ -24,7 +24,7 @@ require_once "dbFunction.php";
                     $desc = $row["Description"];
                 }
             }
-            $id = "";
+            //$id = "";
             $nom = "";
             $prenom = "";
             $date = "";
@@ -35,8 +35,8 @@ require_once "dbFunction.php";
         <div id="divPrin">
             <h1>Formulaire</h1>
             <form action="dbFunction.php?id=<?php echo $id; ?>" method="post">
-                <label for="nom" >ID : </label><br/>
-                <input id="nom" type="text" name="id" value="<?php echo $id; ?>" required><br/>
+                <!--<label for="nom" >ID : </label><br/>
+                <input id="nom" type="text" name="id" value="<?php echo $id; ?>" required><br/>-->
                 
                 <label for="nom" >Nom : </label><br/>
                 <input id="nom" type="text" name="nom" value="<?php echo $nom; ?>" required><br/>
