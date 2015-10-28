@@ -8,7 +8,6 @@ include "dbFunctionHtml.php";
         <meta charset="utf-8">
         <title>Liste Utilisateurs</title>
         <link rel="stylesheet" href="css.css">
-        <script src="script.js"></script>
     </head>
     <body>
         <div id="divTab">
@@ -22,13 +21,14 @@ include "dbFunctionHtml.php";
                     <th>Email</th>
                     <th>Pseudo</th>
                     <?php
+                    if (isset($_REQUEST['idUserDelete'])) {
+                            DeleteUtilisateur($_REQUEST['idUserDelete']);
+                    }
                     if (isset($_REQUEST['id'])) {
                         $id = $_REQUEST['id'];
-                        echo "<th>Mot de passe</th><th>Retour</th><th>Modifier</th><th>Supprimer</th></tr>";
+                        echo "<th>Retour</th><th>Modifier</th><th>Supprimer</th></tr>";
                         CreeTableauDetail(DetailUtilisateur($id));
-                        if (isset($_REQUEST["supprimer"])) {
-                            DeleteUtilisateur($id);
-                        }
+                        
                     } else {
                         echo "<th>Détail</th></tr>";
                         CreeTableau(AfficheUtilisateurs());

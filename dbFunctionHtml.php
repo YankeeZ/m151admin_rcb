@@ -16,10 +16,9 @@ function CreeTableauDetail($tableau) {
         $html .= "<td>" . $row[3] . "</td>";
         $html .= "<td>" . $row[4] . "</td>";
         $html .= "<td>" . $row[5] . "</td>";
-        $html .= "<td>" . $row[6] . "</td>";
         $html .= "<td><a href=./afficheUtilisateur.php>[]</a></td>";
         $html .= "<td><a href=./formulaire.php?id=" . $row[0] . ">[]</a></td>";
-        $html .= "<td><input type=\"submit\" value=\"Supprimer\" onclick=\"window.location='./afficheUtilisateur.php?delete=". $row[0] ."';\" /><td> </tr>";
+        $html .= "<td><a href=./afficheUtilisateur.php?idUserDelete=" . $row[0] . ">[]</a></td>";
         echo $html;
     }
 }

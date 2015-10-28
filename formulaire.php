@@ -7,7 +7,6 @@ require_once "dbFunction.php";
         <meta charset="utf-8">
         <title>Formulaire</title>
         <link rel="stylesheet" href="css.css">
-        <script src="script.js"></script>
     </head>
     <body>
         <?php
@@ -17,12 +16,13 @@ require_once "dbFunction.php";
             $date = "";
             $email = "";
             $pseudo = "";
-            $desc = "";     
+            $desc = "";
+            
             if(isset($_REQUEST["id"]))
             {
-                $update = DetailUtilisateur($_REQUEST["id"]);
-                while ($row = $update->fetch()) {
-                    $id = $row["idUser"];
+                $Detail = DetailUtilisateur($_REQUEST["id"]);
+                while ($row = $Detail->fetch()) {
+                    $id = $_REQUEST["id"];
                     $nom = $row["Nom"];
                     $prenom = $row["Prenom"];
                     $date = $row["DateNaissance"];
@@ -55,9 +55,15 @@ require_once "dbFunction.php";
                 <input id="Mdp" type="password" name="mdp" ><br/>
 
                 <label for="Desc" >Description : </label><br/>
-                <textarea id="Desc" rows="4" cols="50" value="<?php echo $pseudo; ?>" placeholder="Ce champs n'est pas obligatoire !"></textarea><br/><br/>
-                <input type="submit" name="submit"><input type="reset" name="Reset">
-                <input type="hidden" value="<?= $id ?>" name="idUser"/>
+                <textarea id="Desc" rows="4" cols="50" value="<?php echo $desc; ?>" placeholder="Ce champs n'est pas obligatoire !"></textarea><br/><br/>
+                <?php if(isset($_REQUEST["id"])) { ?>
+                <input type="submit" value="update" name="update">
+                <?php } else { ?>
+                <input type="submit" value="submit" name="submit">
+                <?php } ?>
+                
+                <input type="reset" name="Reset">
+                <input type="hidden" value="<?php echo $id ?>" name="idUser"/>
                 <a href="afficheUtilisateur.php">Liste Utilisateurs</a>
             </form> 
         </div>
