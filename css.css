@@ -6,7 +6,7 @@ body{
 input {
     border: solid 2px blue;
     border-radius: 5px;
-    width: 188px;
+    width: 186px;
     height: 20px;
 
 }
@@ -82,10 +82,24 @@ td a:hover{
     padding-bottom: 10px;
 }
 
+#login{
+    position: absolute;
+    margin-left: 40%;
+    background: white;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
 input[type="button"] {
     margin: 0;
     padding: 0;
     width: 17px;
     height: 17px;
     font-weight: bold;
+}
+
+.decaler {
+    margin-left: 90px;
 }

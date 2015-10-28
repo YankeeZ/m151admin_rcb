@@ -64,7 +64,8 @@ require_once "dbFunction.php";
                 
                 <input type="reset" name="Reset">
                 <input type="hidden" value="<?php echo $id ?>" name="idUser"/>
-                <a href="afficheUtilisateur.php">Liste Utilisateurs</a>
+                <br/>
+                <a href="index.php">Connexion</a>
             </form> 
         </div>
     </body>
