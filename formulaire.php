@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "dbFunction.php";
 ?>
 <!doctype html>
@@ -30,8 +31,11 @@ require_once "dbFunction.php";
                     $pseudo = $row["Pseudo"];
                     $desc = $row["Description"];
                 }
-            }
-                         
+            }  
+         
+        if(isset($_SESSION['user'])) {
+            echo "Utilisateur connecté : ".$_SESSION["user"]." - <a href='deconnexion.php'>Déconnexion</a>";    
+        }
         ?>
         <div id="divPrin">
             <h1>Formulaire</h1>
@@ -52,7 +56,7 @@ require_once "dbFunction.php";
                 <input id="pseudo" type="text" name="pseudo" value="<?php echo $pseudo; ?>" required><br/>
 
                 <label for="Mdp" >Mot de passe : </label><br/>
-                <input id="Mdp" type="password" name="mdp" ><br/>
+                <input id="Mdp" type="password" name="mdp" required placeholder="<?php echo "Password changed if blank" ?>"><br/>
 
                 <label for="Desc" >Description : </label><br/>
                 <textarea id="Desc" rows="4" cols="50" value="<?php echo $desc; ?>" placeholder="Ce champs n'est pas obligatoire !"></textarea><br/><br/>
@@ -65,7 +69,11 @@ require_once "dbFunction.php";
                 <input type="reset" name="Reset">
                 <input type="hidden" value="<?php echo $id ?>" name="idUser"/>
                 <br/>
+                <?php if(!isset($_SESSION['user'])) { ?>
                 <a href="index.php">Connexion</a>
+                <?php } else { ?> 
+                 <a href="afficheUtilisateur.php">Affiche Utilisateur</a>
+                <?php } ?>
             </form> 
         </div>
     </body>

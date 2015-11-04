@@ -1,6 +1,11 @@
 <?php
+session_start();
 include "dbFunction.php";
 include "dbFunctionHtml.php";
+
+if (!isset($_SESSION['user'])) {
+    header("Location:index.php");
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -10,6 +15,11 @@ include "dbFunctionHtml.php";
         <link rel="stylesheet" href="css.css">
     </head>
     <body>
+    <?php
+    if (isset($_SESSION['user'])) {
+        echo "Utilisateur connecté : " . $_SESSION["user"] . " - <a href='deconnexion.php'>Déconnexion</a>";
+    }
+    ?>
         <div id="divTab">
             <h1>Liste Utilisateur</h1>
             <table>
@@ -22,13 +32,12 @@ include "dbFunctionHtml.php";
                     <th>Pseudo</th>
                     <?php
                     if (isset($_REQUEST['idUserDelete'])) {
-                            DeleteUtilisateur($_REQUEST['idUserDelete']);
+                        DeleteUtilisateur($_REQUEST['idUserDelete']);
                     }
                     if (isset($_REQUEST['id'])) {
                         $id = $_REQUEST['id'];
                         echo "<th>Retour</th><th>Modifier</th><th>Supprimer</th></tr>";
                         CreeTableauDetail(DetailUtilisateur($id));
-                        
                     } else {
                         echo "<th>Détail</th></tr>";
                         CreeTableau(AfficheUtilisateurs());
