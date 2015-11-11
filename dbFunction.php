@@ -2,6 +2,7 @@
 
 require_once './mysqlinc.php';
 
+//TODO sortir tous les accès à POST/REQUEST/SESSION de ce fichier afin de rendre la bibliothèque de fonctions de BD complètement indépendante
 $nom = FILTER_INPUT(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
 $prenom = FILTER_INPUT(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
 $date = FILTER_INPUT(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
