@@ -79,7 +79,7 @@ function DeleteUtilisateur($id) {
 }
 
 function login($pseudo, $mdp) {
-    $req = getConnexionBDD()->prepare("SELECT idUser, Pseudo, MotDePasse, estAdmin FROM user WHERE Pseudo = :pseudo AND MotDePasse = SHA1(:mdp) LIMIT 1");
+    $req = getConnexionBDD()->prepare("SELECT idUser, Pseudo, MotDePasse FROM user WHERE Pseudo = :pseudo AND MotDePasse = SHA1(:mdp) LIMIT 1");
     $req->bindParam(':pseudo', $pseudo,  PDO::PARAM_STR);
     $req->bindParam(':mdp', $mdp,  PDO::PARAM_STR);
     $req->execute();
@@ -87,6 +87,8 @@ function login($pseudo, $mdp) {
 }
 
 function estAdmin($pseudo) {
-    $result = "SELECT idUser FROM user WHERE Pseudo='$pseudo' AND estAdmin=1";
-    return getConnexionBDD()->query($result);
+    $req = getConnexionBDD()->prepare("SELECT idUser FROM user WHERE Pseudo=:pseudo AND estAdmin=1");
+    $req->bindParam(':pseudo', $pseudo,  PDO::PARAM_STR);
+    $req->execute();
+    return $req->fetch();
 }

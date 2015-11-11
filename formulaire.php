@@ -1,6 +1,15 @@
 <?php
 session_start();
 require_once "dbFunction.php";
+
+if (isset($_SESSION['user'])) {
+    if(isset($_REQUEST["id"])) {
+        header('"Location:formulaire.php?id=$_REQUEST["id"]"');
+    }
+    else {
+        header("Location:afficheUtilisateur.php");
+    }
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -12,7 +21,7 @@ require_once "dbFunction.php";
     <body>
         <?php
             $id = "";
-            $nom = "";
+            $nom = isset($_REQUEST["nom"]) ? $_REQUEST["nom"] : "";
             $prenom = "";
             $date = "";
             $email = "";

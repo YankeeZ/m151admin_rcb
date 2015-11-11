@@ -20,6 +20,8 @@ if (isset($_REQUEST['login'])) {
         echo "<h2 style='font-size:165pt; color:red;'>LOGIN FAILED</h2>";
     }
 }
+
+$pseudo = isset($_REQUEST["nom"]) ? $_REQUEST["nom"] : "";
 ?>
 <!doctype html>
 <html lang="fr">
@@ -32,7 +34,7 @@ if (isset($_REQUEST['login'])) {
         <div id="login">
             <form action="#" method="post">
                 <h1>Connexion</h1>
-                <input class="decaler" type="text" placeholder="Pseudo" name="pseudo" />
+                <input class="decaler" type="text" placeholder="Pseudo" name="pseudo" value="<?php echo $pseudo ?>" />
                 <br/><br/>
                 <input class="decaler" type="password" placeholder="Mot de passe" name="mdp" />
                 <br/><br/>
