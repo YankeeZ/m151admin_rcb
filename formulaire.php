@@ -22,11 +22,11 @@ if (isset($_SESSION['user'])) {
         <?php
             $id = "";
             $nom = isset($_REQUEST["nom"]) ? $_REQUEST["nom"] : "";
-            $prenom = "";
-            $date = "";
-            $email = "";
-            $pseudo = "";
-            $desc = "";
+            $prenom = isset($_REQUEST["prenom"]) ? $_REQUEST["prenom"] : "";
+            $date = isset($_REQUEST["date"]) ? $_REQUEST["date"] : "";
+            $email = isset($_REQUEST["email"]) ? $_REQUEST["email"] : "";
+            $pseudo = isset($_REQUEST["pseudo"]) ? $_REQUEST["pseudo"] : "";
+            $desc = isset($_REQUEST["desc"]) ? $_REQUEST["desc"] : "";
             
             if(isset($_REQUEST["id"]))
             {
@@ -48,7 +48,7 @@ if (isset($_SESSION['user'])) {
         ?>
         <div id="divPrin">
             <h1>Formulaire</h1>
-            <form action="afficheUtilisateur.php" method="post">               
+            <form action="#" method="post">               
                 <label for="nom" >Nom : </label><br/>
                 <input id="nom" type="text" name="nom" value="<?php echo $nom; ?>" required><br/>
 
@@ -65,11 +65,12 @@ if (isset($_SESSION['user'])) {
                 <input id="pseudo" type="text" name="pseudo" value="<?php echo $pseudo; ?>" required><br/>
 
                 <label for="Mdp" >Mot de passe : </label><br/>
-                <input id="Mdp" type="password" name="mdp" required placeholder="<?php echo "Password changed if blank" ?>"><br/>
+                <input id="Mdp" type="password" name="mdp" required placeholder="<?php echo $mdp; ?>"><br/>
 
                 <label for="Desc" >Description : </label><br/>
                 <textarea id="Desc" rows="4" cols="50" value="<?php echo $desc; ?>" placeholder="Ce champs n'est pas obligatoire !"></textarea><br/><br/>
-                <?php if(isset($_REQUEST["id"])) { ?>
+                <?php if(isset($_REQUEST["id"])) { $mdp = "Will change if empty"; ?>
+                
                 <input type="submit" value="update" name="update">
                 <?php } else { ?>
                 <input type="submit" value="submit" name="submit">

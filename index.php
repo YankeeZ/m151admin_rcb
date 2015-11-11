@@ -9,7 +9,6 @@ if(isset($_SESSION['user'])) {
 if (isset($_REQUEST['login'])) {
     
     $userlogin = login($_REQUEST['pseudo'], $_REQUEST['mdp']);
-    var_dump($userlogin);
 
     if ($userlogin != false) {
         $_SESSION['user'] = $_REQUEST['pseudo'];
@@ -21,7 +20,7 @@ if (isset($_REQUEST['login'])) {
     }
 }
 
-$pseudo = isset($_REQUEST["nom"]) ? $_REQUEST["nom"] : "";
+$pseudo = isset($_REQUEST["pseudo"]) ? $_REQUEST["pseudo"] : "";
 ?>
 <!doctype html>
 <html lang="fr">

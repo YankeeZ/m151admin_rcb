@@ -37,7 +37,7 @@ if(isset($_REQUEST['submit']))
 
 function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description) {
 
-    $req = getConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,SHA1(:mdp),:description)");
+    $req = getConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,SHA1(:mdp),:description, 0)");
     $req->bindParam(':nom', $nom, PDO::PARAM_STR);
     $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
     $req->bindParam(':date', $date, PDO::PARAM_STR);
@@ -47,7 +47,7 @@ function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $descripti
     $req->bindParam(':description', $description, PDO::PARAM_STR);
     $req->execute();
 
-    header("Location:formulaire.php");
+    //header("Location:formulaire.php");
 }
 
 function AfficheUtilisateurs() {
