@@ -44,6 +44,7 @@ if (!isset($_SESSION['user'])) {
                     }
                     ?>
             </table>
+            <a href="./JourneeSportive.php">Journée Sportive</a>
         </div>
     </body>
 </html>

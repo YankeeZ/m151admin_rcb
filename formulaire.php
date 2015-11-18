@@ -45,6 +45,9 @@ if (isset($_SESSION['user'])) {
         if(isset($_SESSION['user'])) {
             echo "Utilisateur connecté : ".$_SESSION["user"]." - <a href='deconnexion.php'>Déconnexion</a>";    
         }
+        
+        $classe = getClasses();
+        
         ?>
         <div id="divPrin">
             <h1>Formulaire</h1>
@@ -60,18 +63,28 @@ if (isset($_SESSION['user'])) {
 
                 <label for="email" >Email : </label><br/>
                 <input id="email" type="email" name="email" value="<?php echo $email; ?>" required><br/>
+                
+                <label for="classe" >Classe : </label><br/>
+                <select name>
+                    <?php
+                        foreach ($classe as $c){
+                            echo "<option value=".$c[0].">$c[1]</option>";
+                        }
+                    ?>
+                </select><br/>
 
                 <label for="pseudo" >Pseudo : </label><br/>
                 <input id="pseudo" type="text" name="pseudo" value="<?php echo $pseudo; ?>" required><br/>
 
                 <label for="Mdp" >Mot de passe : </label><br/>
-                <input id="Mdp" type="password" name="mdp" required placeholder="<?php echo $mdp; ?>"><br/>
+                <input id="Mdp" type="password" name="mdp" required placeholder="<?php if(isset($_REQUEST["id"])) { echo "Will change if empty"; } ?>"><br/>
 
                 <label for="Desc" >Description : </label><br/>
                 <textarea id="Desc" rows="4" cols="50" value="<?php echo $desc; ?>" placeholder="Ce champs n'est pas obligatoire !"></textarea><br/><br/>
-                <?php if(isset($_REQUEST["id"])) { $mdp = "Will change if empty"; ?>
                 
+                <?php if(isset($_REQUEST["id"])) { ?>
                 <input type="submit" value="update" name="update">
+                
                 <?php } else { ?>
                 <input type="submit" value="submit" name="submit">
                 <?php } ?>

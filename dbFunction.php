@@ -11,13 +11,14 @@ $pseudo = FILTER_INPUT(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING);
 $mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
 $description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
 $id = FILTER_INPUT(INPUT_POST, 'idUser', FILTER_SANITIZE_STRING);
+$classe = FILTER_INPUT(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
 
 if (isset($_REQUEST['update'])) {
     ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
 }
 if(isset($_REQUEST['submit']))
 {
-    CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description);
+    CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $classe);
 }
 
 function getConnexionBDD() {
@@ -36,9 +37,9 @@ function getConnexionBDD() {
 }
 
 
-function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description) {
+function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $classe) {
 
-    $req = getConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,SHA1(:mdp),:description, 0)");
+    $req = getConnexionBDD()->prepare("INSERT INTO user VALUES('',:nom,:prenom,:date,:email,:pseudo,SHA1(:mdp),:description, 0, :classe)");
     $req->bindParam(':nom', $nom, PDO::PARAM_STR);
     $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
     $req->bindParam(':date', $date, PDO::PARAM_STR);
@@ -46,6 +47,7 @@ function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $descripti
     $req->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
     $req->bindParam(':mdp', $mdp, PDO::PARAM_STR);
     $req->bindParam(':description', $description, PDO::PARAM_STR);
+    $req->bindParam(':classe', $classe, PDO::PARAM_STR);
     $req->execute();
 
     //header("Location:formulaire.php");
@@ -92,4 +94,14 @@ function estAdmin($pseudo) {
     $req->bindParam(':pseudo', $pseudo,  PDO::PARAM_STR);
     $req->execute();
     return $req->fetch();
+}
+
+function getClasses() {
+    $result = "SELECT * FROM classes";
+    return getConnexionBDD()->query($result);
+}
+
+function getSports() {
+    $result = "SELECT * FROM sports";
+    return getConnexionBDD()->query($result);
 }

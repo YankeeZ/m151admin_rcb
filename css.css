@@ -8,7 +8,6 @@ input {
     border-radius: 5px;
     width: 186px;
     height: 20px;
-
 }
 textarea{
     border: solid 2px blue;
@@ -102,4 +101,11 @@ input[type="button"] {
 
 .decaler {
     margin-left: 90px;
+}
+
+select {
+    border: solid 2px blue;
+    border-radius: 5px;
+    width: 190px;
+    height: 27px;
 }
