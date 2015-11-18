@@ -12,6 +12,14 @@ $mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
 $description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
 $id = FILTER_INPUT(INPUT_POST, 'idUser', FILTER_SANITIZE_STRING);
 
+if (isset($_REQUEST['update'])) {
+    ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
+}
+if(isset($_REQUEST['submit']))
+{
+    CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description);
+}
+
 function getConnexionBDD() {
 
     static $dbh = null;
@@ -27,13 +35,6 @@ function getConnexionBDD() {
     return $dbh;
 }
 
-if (isset($_REQUEST['update'])) {
-    ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
-}
-if(isset($_REQUEST['submit']))
-{
-    CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description);
-}
 
 function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description) {
 
