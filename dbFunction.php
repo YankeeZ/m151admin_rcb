@@ -12,6 +12,10 @@ $mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
 $description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
 $id = FILTER_INPUT(INPUT_POST, 'idUser', FILTER_SANITIZE_STRING);
 $classe = FILTER_INPUT(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
+$sport1 = FILTER_INPUT(INPUT_POST, 'sport1', FILTER_SANITIZE_STRING);
+$sport2 = FILTER_INPUT(INPUT_POST, 'sport2', FILTER_SANITIZE_STRING);
+$sport3 = FILTER_INPUT(INPUT_POST, 'sport3', FILTER_SANITIZE_STRING);
+$sport4 = FILTER_INPUT(INPUT_POST, 'sport4', FILTER_SANITIZE_STRING);
 
 if (isset($_REQUEST['update'])) {
     ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
@@ -103,5 +107,10 @@ function getClasses() {
 
 function getSports() {
     $result = "SELECT * FROM sports";
+    return getConnexionBDD()->query($result);
+}
+
+function choix($idSport, $id, $Ordre) {
+    $result = "INSERT FROM choix VALUES(idUser=$id, idSport=$idSport, OrdrePreference=$Ordre";
     return getConnexionBDD()->query($result);
 }

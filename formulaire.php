@@ -65,7 +65,7 @@ if (isset($_SESSION['user'])) {
                 <input id="email" type="email" name="email" value="<?php echo $email; ?>" required><br/>
                 
                 <label for="classe" >Classe : </label><br/>
-                <select name>
+                <select name="classe">
                     <?php
                         foreach ($classe as $c){
                             echo "<option value=".$c[0].">$c[1]</option>";
