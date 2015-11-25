@@ -11,22 +11,25 @@ $pseudo = FILTER_INPUT(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING);
 $mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
 $description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
 $id = FILTER_INPUT(INPUT_POST, 'idUser', FILTER_SANITIZE_STRING);
+
 $classe = FILTER_INPUT(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
-$sport1 = FILTER_INPUT(INPUT_POST, 'sport1', FILTER_SANITIZE_STRING);
-$sport2 = FILTER_INPUT(INPUT_POST, 'sport2', FILTER_SANITIZE_STRING);
-$sport3 = FILTER_INPUT(INPUT_POST, 'sport3', FILTER_SANITIZE_STRING);
-$sport4 = FILTER_INPUT(INPUT_POST, 'sport4', FILTER_SANITIZE_STRING);
+$sport = FILTER_INPUT(INPUT_POST, 'sport', FILTER_SANITIZE_STRING);
+$choix1 = FILTER_INPUT(INPUT_POST, 'choix1', FILTER_SANITIZE_STRING);
+$choix2 = FILTER_INPUT(INPUT_POST, 'choix2', FILTER_SANITIZE_STRING);
+$choix3 = FILTER_INPUT(INPUT_POST, 'choix3', FILTER_SANITIZE_STRING);
+$choix4 = FILTER_INPUT(INPUT_POST, 'choix4', FILTER_SANITIZE_STRING);
 
 if (isset($_REQUEST['update'])) {
     ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
 }
-if(isset($_REQUEST['submit']))
-{
+if (isset($_REQUEST['submit'])) {
     CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $classe);
+}
+if (isset($_REQUEST["Sports"])) {
+    choix($id, $choix1, $choix2, $choix3, $choix4);
 }
 
 function getConnexionBDD() {
-
     static $dbh = null;
     if ($dbh == null) {
         try {
@@ -39,7 +42,6 @@ function getConnexionBDD() {
     }
     return $dbh;
 }
-
 
 function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $classe) {
 
@@ -68,7 +70,7 @@ function DetailUtilisateur($id) {
 }
 
 function ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id) {
-    
+
     $req = getConnexionBDD()->prepare("UPDATE user SET Nom=:nom, Prenom=:prenom, DateNaissance=:date, Email=:email, Pseudo=:pseudo, MotDePasse=SHA1(:mdp), Description=:description WHERE idUser=$id");
     $req->bindParam(':nom', $nom, PDO::PARAM_STR);
     $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -87,15 +89,15 @@ function DeleteUtilisateur($id) {
 
 function login($pseudo, $mdp) {
     $req = getConnexionBDD()->prepare("SELECT idUser, Pseudo, MotDePasse FROM user WHERE Pseudo = :pseudo AND MotDePasse = SHA1(:mdp) LIMIT 1");
-    $req->bindParam(':pseudo', $pseudo,  PDO::PARAM_STR);
-    $req->bindParam(':mdp', $mdp,  PDO::PARAM_STR);
+    $req->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+    $req->bindParam(':mdp', $mdp, PDO::PARAM_STR);
     $req->execute();
     return $req->fetch();
 }
 
 function estAdmin($pseudo) {
     $req = getConnexionBDD()->prepare("SELECT idUser FROM user WHERE Pseudo=:pseudo AND estAdmin=1");
-    $req->bindParam(':pseudo', $pseudo,  PDO::PARAM_STR);
+    $req->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
     $req->execute();
     return $req->fetch();
 }
@@ -107,10 +109,31 @@ function getClasses() {
 
 function getSports() {
     $result = "SELECT * FROM sports";
-    return getConnexionBDD()->query($result);
+    return getConnexionBDD()->query($result)->fetchAll();
 }
 
-function choix($idSport, $id, $Ordre) {
-    $result = "INSERT FROM choix VALUES(idUser=$id, idSport=$idSport, OrdrePreference=$Ordre";
-    return getConnexionBDD()->query($result);
+function choix($id, $choix1, $choix2, $choix3, $choix4) {
+    /*try {*/
+        getConnexionBDD()->beginTransaction();
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport1, idUser=$id, 1");
+        $req->bindParam(':idSport1', $choix1, PDO::PARAM_STR);
+        $req->execute();
+
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport2, idUser=$id, 2");
+        $req->bindParam(':idSport2', $choix2, PDO::PARAM_STR);
+        $req->execute();
+
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport3, idUser=$id, 3");
+        $req->bindParam(':idSport3', $choix3, PDO::PARAM_STR);
+        $req->execute();
+
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport4, idUser=$id, 4");
+        $req->bindParam(':idSport4', $choix4, PDO::PARAM_STR);
+        $req->execute();
+        getConnexionBDD()->commit();
+        
+        header("Location:afficheUtilisateur.php");
+    //} catch (Exception $e) {
+      //  getConnexionBDD()->rollBack();
+    //}
 }

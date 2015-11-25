@@ -6,14 +6,8 @@ if (!isset($_SESSION['user'])) {
     header("Location:index.php");
 }
 
-$sport1 = getSports();
-$sport2 = getSports();
-$sport3 = getSports();
-$sport4 = getSports();
+$sport = getSports();
 
-if (isset($_REQUEST["Sports"])) {
-    choix($idSport, $id, $Ordre);
-}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -25,46 +19,22 @@ if (isset($_REQUEST["Sports"])) {
     <body>
         <div id="divPrin">
             <h1>Choix du Sports</h1>
-            <form action="#" method="post">               
-                <label for="sport1" >Choix 1 : </label><br/>
-                <select name="sport1">
-                    <?php
-                    foreach ($sport1 as $s1) {
-                        echo "<option value=" . $s1[0] . ">$s1[1]</option>";
-                    }
-                    ?>
-                </select><br/>
+            <form action="dbFunction.php" method="post">               
+                <?php
+                for ($i = 1; $i <= 4; $i++) {
+                    echo "<label for='choix$i' >Choix $i : </label><br/>";
+                    echo "<select name='choix$i'>";
 
-                <label for="sport2" >Choix 2 : </label><br/>
-                <select name="sport2">
-                    <?php
-                    foreach ($sport2 as $s2) {
-                        echo "<option value=" . $s2[0] . ">$s2[1]</option>";
+                    foreach ($sport as $s) {
+                        echo "<option name='sport' value='$s[0]'>$s[1]</option>";
                     }
-                    ?>
-                </select><br/>
-
-                <label for="sport3" >Choix 3 : </label><br/>
-                <select name="sport3">
-                    <?php
-                    foreach ($sport3 as $s3) {
-                        echo "<option value=" . $s3[0] . ">$s3[1]</option>";
-                    }
-                    ?>
-                </select><br/>
-
-                <label for="sport4" >Choix 4 : </label><br/>
-                <select name="sport4">
-                    <?php
-                    foreach ($sport4 as $s4) {
-                        echo "<option value=" . $s4[0] . ">$s4[1]</option>";
-                    }
-                    ?>
-                </select><br/><br/>
-
+                    echo "</select><br/>";
+                }
+                ?>
+                <br/><br/>
                 <input type="submit" value="submit" name="Sports">
-
                 <input type="reset" name="Reset">
+                <input type="hidden" name="idUser">
                 <br/><br/>
                 <a href="afficheUtilisateur.php">Affiche Utilisateur</a>
             </form> 
