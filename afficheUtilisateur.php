@@ -6,6 +6,9 @@ include "./php/dbFunctionHtml.php";
 if (!isset($_SESSION['user'])) {
     header("Location:index.php");
 }
+
+$admin = estAdmin($_SESSION['user']);
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -44,7 +47,7 @@ if (!isset($_SESSION['user'])) {
                     }
                     ?>
             </table>
-            <a href="./JourneeSportive.php">Journée Sportive</a>
+            <a href="./JourneeSportive.php">Journée Sportive</a><?php if ($admin !== false) { ?> -<a href="./afficheSports.php">  Listes Sports</a> <?php }  ?>
         </div>
     </body>
 </html>

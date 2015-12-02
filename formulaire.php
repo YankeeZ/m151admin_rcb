@@ -13,9 +13,11 @@ if (isset($_SESSION['user'])) {
 
 if (isset($_REQUEST['update'])) {
     ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
+    header("Location:afficheUtilisateur.php");
 }
 if (isset($_REQUEST['submit'])) {
     CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $classe);
+    header("Location:connexion.php");
 }
 ?>
 <!doctype html>

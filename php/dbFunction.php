@@ -30,7 +30,6 @@ function CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $descripti
     $req->bindParam(':classe', $classe, PDO::PARAM_STR);
     $req->execute();
 
-    //header("Location:formulaire.php");
 }
 
 function AfficheUtilisateurs() {
@@ -62,7 +61,7 @@ function DeleteUtilisateur($id) {
 }
 
 function login($pseudo, $mdp) {
-    $req = getConnexionBDD()->prepare("SELECT idUser, Pseudo, MotDePasse FROM user WHERE Pseudo = :pseudo AND MotDePasse = SHA1(:mdp) LIMIT 1");
+    $req = getConnexionBDD()->prepare("SELECT idUser, Pseudo, MotDePasse FROM user WHERE BINARY Pseudo = :pseudo AND MotDePasse = SHA1(:mdp) LIMIT 1");
     $req->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
     $req->bindParam(':mdp', $mdp, PDO::PARAM_STR);
     $req->execute();
@@ -79,6 +78,11 @@ function estAdmin($pseudo) {
 function getClasses() {
     $result = "SELECT * FROM classes";
     return getConnexionBDD()->query($result);
+}
+
+function getSportsInactifs() {
+    $result = "SELECT * FROM sports WHERE inactifs=0";
+    return getConnexionBDD()->query($result)->fetchAll();
 }
 
 function getSports() {

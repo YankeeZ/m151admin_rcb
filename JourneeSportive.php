@@ -1,12 +1,11 @@
 <?php
 session_start();
 require_once "./php/dbFunction.php";
+require_once "./php/dbFunctionHtml.php";
 
 if (!isset($_SESSION['user'])) {
     header("Location:index.php");
 }
-
-$sport = getSports();
 
 if (isset($_REQUEST["Sports"])) {
     choix($_SESSION['idUser'], $choix1, $choix2, $choix3, $choix4);
@@ -25,15 +24,7 @@ if (isset($_REQUEST["Sports"])) {
             <h1>Choix du Sports</h1>
             <form action="#" method="post">               
                 <?php
-                for ($i = 1; $i <= 4; $i++) {
-                    echo "<label for='choix$i' >Choix $i : </label><br/>";
-                    echo "<select name='choix$i'>";
-
-                    foreach ($sport as $s) {
-                        echo "<option name='sport' value='$s[0]'>$s[1]</option>";
-                    }
-                    echo "</select><br/>";
-                }
+                    ChoixSports(getSportsInactifs())
                 ?>
                 <br/><br/>
                 <input type="submit" value="submit" name="Sports">
