@@ -1,6 +1,6 @@
 <?php
 
-require_once './mysqlinc.php';
+require_once 'mysqlinc.php';
 
 //TODO sortir tous les accès à POST/REQUEST/SESSION de ce fichier afin de rendre la bibliothèque de fonctions de BD complètement indépendante
 $nom = FILTER_INPUT(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
@@ -115,19 +115,19 @@ function getSports() {
 function choix($id, $choix1, $choix2, $choix3, $choix4) {
     /*try {*/
         getConnexionBDD()->beginTransaction();
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport1, idUser=$id, 1");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport1, idUser=$id, 1)");
         $req->bindParam(':idSport1', $choix1, PDO::PARAM_STR);
         $req->execute();
 
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport2, idUser=$id, 2");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport2, idUser=$id, 2)");
         $req->bindParam(':idSport2', $choix2, PDO::PARAM_STR);
         $req->execute();
 
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport3, idUser=$id, 3");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport3, idUser=$id, 3)");
         $req->bindParam(':idSport3', $choix3, PDO::PARAM_STR);
         $req->execute();
 
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport4, idUser=$id, 4");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport4, idUser=$id, 4)");
         $req->bindParam(':idSport4', $choix4, PDO::PARAM_STR);
         $req->execute();
         getConnexionBDD()->commit();

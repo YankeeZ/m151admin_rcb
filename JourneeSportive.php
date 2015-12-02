@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "dbFunction.php";
+require_once "./php/dbFunction.php";
 
 if (!isset($_SESSION['user'])) {
     header("Location:index.php");
@@ -14,12 +14,12 @@ $sport = getSports();
     <head>
         <meta charset="utf-8">
         <title>Choix Sports</title>
-        <link rel="stylesheet" href="css.css">
+        <link rel="stylesheet" href="./css/css.css">
     </head>
     <body>
         <div id="divPrin">
             <h1>Choix du Sports</h1>
-            <form action="dbFunction.php" method="post">               
+            <form action="./php/dbFunction.php" method="post">               
                 <?php
                 for ($i = 1; $i <= 4; $i++) {
                     echo "<label for='choix$i' >Choix $i : </label><br/>";

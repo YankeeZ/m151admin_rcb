@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "dbFunction.php";
-include "dbFunctionHtml.php";
+include "./php/dbFunction.php";
+include "./php/dbFunctionHtml.php";
 
 if (!isset($_SESSION['user'])) {
     header("Location:index.php");
@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
     <head>
         <meta charset="utf-8">
         <title>Liste Utilisateurs</title>
-        <link rel="stylesheet" href="css.css">
+        <link rel="stylesheet" href="./css/css.css">
     </head>
     <body>
         <?php

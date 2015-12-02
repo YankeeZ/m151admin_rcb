@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "dbFunction.php";
+require_once "./php/dbFunction.php";
 
 if (isset($_SESSION['user'])) {
     if(isset($_REQUEST["id"])) {
@@ -16,7 +16,7 @@ if (isset($_SESSION['user'])) {
     <head>
         <meta charset="utf-8">
         <title>Formulaire</title>
-        <link rel="stylesheet" href="css.css">
+        <link rel="stylesheet" href="./css/css.css">
     </head>
     <body>
         <?php

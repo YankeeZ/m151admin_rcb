@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'dbFunction.php';
+include './php/dbFunction.php';
 
 if(isset($_SESSION['user'])) {
     header('Location: ./afficheUtilisateur.php');
@@ -27,7 +27,7 @@ $pseudo = isset($_REQUEST["pseudo"]) ? $_REQUEST["pseudo"] : "";
     <head>
         <meta charset="utf-8">
         <title>Connexion</title>
-        <link rel="stylesheet" href="css.css">
+        <link rel="stylesheet" href="./css/css.css">
     </head>
     <body>
         <div id="login">
