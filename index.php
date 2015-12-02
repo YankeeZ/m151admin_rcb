@@ -13,6 +13,7 @@ if (isset($_REQUEST['login'])) {
     if ($userlogin != false) {
         $_SESSION['user'] = $_REQUEST['pseudo'];
         $_SESSION['estAdmin'] = $userlogin['estAdmin'];
+        $_SESSION['idUser'] = $userlogin['idUser'];
         header('Location: ./afficheUtilisateur.php');
     }
     else {

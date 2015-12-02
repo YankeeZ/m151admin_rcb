@@ -1,33 +1,7 @@
 <?php
 
 require_once 'mysqlinc.php';
-
-//TODO sortir tous les accès à POST/REQUEST/SESSION de ce fichier afin de rendre la bibliothèque de fonctions de BD complètement indépendante
-$nom = FILTER_INPUT(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
-$prenom = FILTER_INPUT(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
-$date = FILTER_INPUT(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-$email = FILTER_INPUT(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-$pseudo = FILTER_INPUT(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING);
-$mdp = FILTER_INPUT(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
-$description = FILTER_INPUT(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-$id = FILTER_INPUT(INPUT_POST, 'idUser', FILTER_SANITIZE_STRING);
-
-$classe = FILTER_INPUT(INPUT_POST, 'classe', FILTER_SANITIZE_STRING);
-$sport = FILTER_INPUT(INPUT_POST, 'sport', FILTER_SANITIZE_STRING);
-$choix1 = FILTER_INPUT(INPUT_POST, 'choix1', FILTER_SANITIZE_STRING);
-$choix2 = FILTER_INPUT(INPUT_POST, 'choix2', FILTER_SANITIZE_STRING);
-$choix3 = FILTER_INPUT(INPUT_POST, 'choix3', FILTER_SANITIZE_STRING);
-$choix4 = FILTER_INPUT(INPUT_POST, 'choix4', FILTER_SANITIZE_STRING);
-
-if (isset($_REQUEST['update'])) {
-    ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
-}
-if (isset($_REQUEST['submit'])) {
-    CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $classe);
-}
-if (isset($_REQUEST["Sports"])) {
-    choix($id, $choix1, $choix2, $choix3, $choix4);
-}
+require_once 'getData.php';
 
 function getConnexionBDD() {
     static $dbh = null;
@@ -113,27 +87,28 @@ function getSports() {
 }
 
 function choix($id, $choix1, $choix2, $choix3, $choix4) {
-    /*try {*/
+    try {
         getConnexionBDD()->beginTransaction();
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport1, idUser=$id, 1)");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport1, $id, 1)");
         $req->bindParam(':idSport1', $choix1, PDO::PARAM_STR);
         $req->execute();
 
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport2, idUser=$id, 2)");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport2, $id, 2)");
         $req->bindParam(':idSport2', $choix2, PDO::PARAM_STR);
         $req->execute();
 
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport3, idUser=$id, 3)");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport3, $id, 3)");
         $req->bindParam(':idSport3', $choix3, PDO::PARAM_STR);
         $req->execute();
 
-        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport4, idUser=$id, 4)");
+        $req = getConnexionBDD()->prepare("INSERT INTO choix VALUES(:idSport4, $id, 4)");
         $req->bindParam(':idSport4', $choix4, PDO::PARAM_STR);
         $req->execute();
         getConnexionBDD()->commit();
-        
-        header("Location:afficheUtilisateur.php");
-    //} catch (Exception $e) {
-      //  getConnexionBDD()->rollBack();
-    //}
+
+        return true;
+    } catch (Exception $e) {
+        getConnexionBDD()->rollBack();
+        return false;
+    }
 }

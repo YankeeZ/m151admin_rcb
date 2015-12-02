@@ -17,7 +17,7 @@ if (!isset($_SESSION['user'])) {
     <body>
         <?php
         if (isset($_SESSION['user'])) {
-            echo "Utilisateur connecté : " . $_SESSION["user"] . " - <a href='deconnexion.php'>Déconnexion</a>";
+            echo "Utilisateur connecté : " . $_SESSION["user"] . " - <a href='./php/deconnexion.php'>Déconnexion</a>";
         }
         ?>
         <div id="divTab">

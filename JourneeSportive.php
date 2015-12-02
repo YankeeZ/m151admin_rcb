@@ -8,6 +8,10 @@ if (!isset($_SESSION['user'])) {
 
 $sport = getSports();
 
+if (isset($_REQUEST["Sports"])) {
+    choix($_SESSION['idUser'], $choix1, $choix2, $choix3, $choix4);
+    header("Location:afficheUtilisateur.php");
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -19,7 +23,7 @@ $sport = getSports();
     <body>
         <div id="divPrin">
             <h1>Choix du Sports</h1>
-            <form action="./php/dbFunction.php" method="post">               
+            <form action="#" method="post">               
                 <?php
                 for ($i = 1; $i <= 4; $i++) {
                     echo "<label for='choix$i' >Choix $i : </label><br/>";
@@ -34,7 +38,6 @@ $sport = getSports();
                 <br/><br/>
                 <input type="submit" value="submit" name="Sports">
                 <input type="reset" name="Reset">
-                <input type="hidden" name="idUser">
                 <br/><br/>
                 <a href="afficheUtilisateur.php">Affiche Utilisateur</a>
             </form> 

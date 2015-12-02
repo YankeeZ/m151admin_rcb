@@ -10,6 +10,13 @@ if (isset($_SESSION['user'])) {
         header("Location:afficheUtilisateur.php");
     }
 }
+
+if (isset($_REQUEST['update'])) {
+    ModifierUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $id);
+}
+if (isset($_REQUEST['submit'])) {
+    CreeUtilisateur($nom, $prenom, $date, $email, $pseudo, $mdp, $description, $classe);
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -86,7 +93,7 @@ if (isset($_SESSION['user'])) {
                 <input type="submit" value="update" name="update">
                 
                 <?php } else { ?>
-                <input type="submit" value="submit" name="submit">
+                <input type="submit" value="Envoyer" name="submit">
                 <?php } ?>
                 
                 <input type="reset" name="Reset">
